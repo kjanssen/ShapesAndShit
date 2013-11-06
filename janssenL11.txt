@@ -1,0 +1,94 @@
+// File: janssenL11.txt
+// Author: Kyle Janssen
+// Contents: This is my submission for Lab 11. I am in a group with Aman Gill.
+
+
+Group 1.
+      a. What option have you selected from Group 1?
+
+      
+
+      b. What questions do you have regarding the implementation of this option?
+
+
+
+      c. How much have you completed?
+
+
+
+      d. What plans have you made for testing this option?
+
+
+
+
+Group 2.
+      a. What option have you selected from Group 2?
+
+
+
+      b. What questions do you have regarding the implementation of this option?
+
+
+
+      c. How much have you completed?
+
+
+
+      d. What plans have you made for testing this option?
+
+
+
+
+Group 3.
+      a. What option have you selected from Group 3?
+
+
+
+      b. What questions do you have regarding the implementation of this option?
+
+
+
+      c. How much have you completed?
+
+
+
+      d. What plans have you made for testing this option?
+
+
+
+
+Group 4.
+      a. What option have you selected from Group 4?
+
+
+
+      b. What questions do you have regarding the implementation of this option?
+
+
+
+      c. How much have you completed?
+
+
+
+      d. What plans have you made for testing this option?
+
+
+
+
+Group 5. (Extra Credit)
+      a. What option have you selected from Group 5?
+
+
+
+      b. What questions do you have regarding the implementation of this option?
+
+
+
+      c. How much have you completed?
+
+
+
+      d. What plans have you made for testing this option?
+
+
+
