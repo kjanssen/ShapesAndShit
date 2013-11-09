@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener
 {
-        private JButton saveButton, loadButton;
+        private JButton saveButton, loadButton, colorButton;
 	private JFrame outside;
 	private boolean inFrame = true;
 	private int currentX, currentY;
@@ -38,6 +38,9 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 		loadButton = new JButton ("Load Shapes");
 		add (loadButton);
 		loadButton.addActionListener (this);
+		colorButton = new JButton ("Change Background Color");
+		add (colorButton);
+		colorButton.addActionListener (this);
 		setBackground (Color.BLACK);
 		addMouseMotionListener(this);
 		addMouseListener(this);
@@ -94,6 +97,13 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 				shapeIO.readShapes (fileiodialog.getFilename(), S);
 				repaint();
 			}
+		}
+		else if (e.getSource() == colorButton)
+		{
+		        BackgroundDialog backgrounddialog = new BackgroundDialog(outside, true, getBackground());
+
+			if (backgrounddialog.getAnswer() == true)
+			        setBackground (backgrounddialog.getColor());
 		}
 	}
 	public void mousePressed (MouseEvent e)
