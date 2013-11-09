@@ -111,7 +111,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 				//ShapeDialog shapedialog = new ShapeDialog(this, true, e.getX(), e.getY());
 				if (shapedialog.getAnswer() == true)
 				{
-					Shape newshape = shapedialog.getShape();
+					Shape newshape = shapedialog.getMyShape();
 					S.add(newshape);
 					newshape.setCenterX(e.getX());
 					newshape.setCenterY(e.getY());

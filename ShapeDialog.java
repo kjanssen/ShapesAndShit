@@ -21,7 +21,7 @@ public class ShapeDialog extends JDialog implements ActionListener
 	private JPanel buttonPanel = null;    
 	private Shape newShape = null;
  	private boolean answer = false;
-	public Shape getShape () {return newShape; }
+	public Shape getMyShape () {return newShape; }
  	public boolean getAnswer() { return answer; }
 
 	public ShapeDialog(JFrame frame, boolean modal, int x, int y)
@@ -56,7 +56,7 @@ public class ShapeDialog extends JDialog implements ActionListener
 	{
 		if(OKButton == e.getSource()) 
 		{
-			Shape.ShapeType currentShape = shapePanel.getShape ();
+			Shape.ShapeType currentShape = shapePanel.getMyShape ();
 			switch (currentShape)
 			{
 				case CIRCLE:
@@ -93,7 +93,7 @@ public class ShapeDialog extends JDialog implements ActionListener
 		private JPanel shapePanel = null;
 		private ButtonGroup shapeGroup = null;
 		private Shape.ShapeType currentShape = Shape.ShapeType.CIRCLE;
-		public Shape.ShapeType getShape () { return currentShape; }
+		public Shape.ShapeType getMyShape () { return currentShape; }
 
 		public ShapePanel ()
 		{

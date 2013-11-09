@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SOURCES=$@
+CLASSES=
+
+javac $SOURCES
+
+INDEX=0
+for FILE in $SOURCES
+do
+	CLASSES[$INDEX]=${FILE%.*}".class"
+	INDEX=$INDEX+1
+done
+
+jar cf DrawShapes.jar $CLASSES
+rm -f $CLASSES
+
+exit 0
