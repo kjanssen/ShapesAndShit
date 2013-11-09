@@ -119,9 +119,12 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             for (int i = S.size()-1; selected == null && i >= 0; i--)
                 if (S.get(i).isIn(currentX, currentY))
                 {
-                    selected = S.get(i);
+                    selected = S.remove(i);
+                    S.add(selected);
+                    break;
                     //System.out.println ("Selected " + selected.getName() + "; " + selected);
                 }
+            repaint();
         }
         else if (e.getButton() == e.BUTTON3) // Right mouse button
         {
@@ -129,13 +132,18 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             for (int i = S.size()-1; selected == null && i >= 0; i--)
                 if (S.get(i).isIn(currentX, currentY))
                 {
-                    selected = S.get(i);
+                    selected = S.remove(i);
+                    S.add(selected);
+                    break;
                     //System.out.println ("Selected " + selected.getName() + "; " + selected);
                 }
+
+            repaint();
+            
             if (selected != null)
                 selected.modifyShape (outside, e.getX(), e.getY());
             else
-            {    
+            {        
                 ShapeDialog shapedialog = new ShapeDialog(outside, true, e.getX(), e.getY());
                 //ShapeDialog shapedialog = new ShapeDialog(this, true, e.getX(), e.getY());
                 if (shapedialog.getAnswer() == true)
