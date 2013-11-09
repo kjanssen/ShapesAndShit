@@ -148,13 +148,4 @@ public final class Right extends Triangle
 		string += angle + " ";
 		return string;
 	}
-	
-	public boolean isIn (int X, int Y)
-	{
-		int deltaX = Math.abs (X - centerX);
-		int deltaY = Math.abs (Y - centerY);
-		if (deltaX <= side/2 && deltaY <= side2/2)
-			return true;
-		return false;
-	}
 }

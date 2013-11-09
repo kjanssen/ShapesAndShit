@@ -76,6 +76,12 @@ public final class Circle extends Shape
 		g2.setPaint (color);
 		g2.fillOval (centerX-side, centerY-side, 2*side, 2*side);
 		g2.drawOval (centerX-side, centerY-side, 2*side, 2*side);
+        
+        if (highlited) {
+            g2.setPaint(highlite);
+            g2.fillOval (centerX-side, centerY-side, 2*side, 2*side);
+        }
+
 		g2.setPaint (Color.BLACK);
 		g2.fillOval (centerX-1, centerY-1, 2, 2); // Draw the center point
 	}
@@ -86,6 +92,8 @@ public final class Circle extends Shape
 		int deltaY = Y - centerY;
 		double dist = sqrt (deltaX * deltaX + deltaY * deltaY);
 		//System.out.println ("dist = " + dist + " side = " + side);
-		return dist <= side;
+		highlited = dist <= side;
+        return highlited;
+
 	}
 }

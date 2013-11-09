@@ -20,6 +20,8 @@ public class Shape implements Comparable<Shape>
 	protected int centerY;
 	protected int side;
 	protected Color color;
+    protected Color highlite = new Color(198,226,255,192);
+    protected boolean highlited = false;
 
 	public Shape ()
 	{
