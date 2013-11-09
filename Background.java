@@ -8,7 +8,7 @@
    This file contains the definition and implementation of 
    a background Panel class for a small GUI application that
    uses the Shape class hierarchy.
-   */
+ */
 
 import java.awt.*;
 import java.awt.event.*;
