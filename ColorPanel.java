@@ -20,10 +20,14 @@ public class ColorPanel extends JPanel implements ActionListener
 			yellowRButton = null, greenRButton = null,
 			blueRButton = null, purpleRButton = null,
 			whiteRButton = null, grayRButton = null,
-			blackRButton = null;
+	                blackRButton = null, brickRButton = null,
+	                steelRButton = null, pinkRButton = null;
 	private ButtonGroup colorGroup = null;
 	private Color currentColor;
+	private static Color pink = new Color (255, 20, 147);
 	private static Color orange = new Color (237, 155, 37);
+        private static Color brick = new Color (207, 83, 0);
+        private static Color steel = new Color (70, 130, 180);
 	private static Color purple = new Color (82, 8, 125);
 	private static Color gray = new Color (170, 170, 170);
 	public Color getColor () { return currentColor; }
@@ -32,10 +36,18 @@ public class ColorPanel extends JPanel implements ActionListener
 	{
 		currentColor = C;
 		setLayout (new GridLayout (0,4,0,0));
+		pinkRButton = new JRadioButton("Pink", currentColor.equals(pink));
+		pinkRButton.addActionListener(this);
+		pinkRButton.setForeground (pink);
+		add (pinkRButton);
 		redRButton = new JRadioButton ("Red", currentColor.equals(Color.red));
 		redRButton.addActionListener(this);
 		redRButton.setForeground (Color.red);
 		add (redRButton);
+		brickRButton = new JRadioButton ("Brick", currentColor.equals(brick));
+		brickRButton.addActionListener(this);
+		brickRButton.setForeground (brick);
+		add (brickRButton);
 		orangeRButton = new JRadioButton ("Orange", currentColor.equals(orange));
 		orangeRButton.addActionListener(this);
 		orangeRButton.setForeground (orange);
@@ -52,6 +64,10 @@ public class ColorPanel extends JPanel implements ActionListener
 		blueRButton.addActionListener(this);
 		blueRButton.setForeground (Color.blue);
 		add (blueRButton);
+		steelRButton = new JRadioButton ("Steel", currentColor.equals(steel));
+		steelRButton.addActionListener(this);
+		steelRButton.setForeground (steel);
+		add (steelRButton);
 		purpleRButton = new JRadioButton ("Purple", currentColor.equals(purple));
 		purpleRButton.addActionListener(this);
 		purpleRButton.setForeground (purple);
@@ -68,11 +84,14 @@ public class ColorPanel extends JPanel implements ActionListener
 		blackRButton.addActionListener(this);
 		add (blackRButton);
 		colorGroup = new ButtonGroup ();
+		colorGroup.add (pinkRButton);
 		colorGroup.add (redRButton);
+		colorGroup.add (brickRButton);
 		colorGroup.add (orangeRButton);
 		colorGroup.add (yellowRButton);
 		colorGroup.add (greenRButton);
 		colorGroup.add (blueRButton);
+		colorGroup.add (steelRButton);
 		colorGroup.add (purpleRButton);
 		colorGroup.add (whiteRButton);
 		colorGroup.add (grayRButton);
@@ -81,8 +100,12 @@ public class ColorPanel extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
- 		if (redRButton == e.getSource())
+	        if (pinkRButton == e.getSource())
+		        currentColor = pink;
+	        else if (redRButton == e.getSource())
 			currentColor = Color.red;
+		else if (brickRButton == e.getSource())
+		        currentColor = brick;
 		else if (orangeRButton == e.getSource())
 			currentColor = orange;
 	 	else if (yellowRButton == e.getSource())
@@ -91,6 +114,8 @@ public class ColorPanel extends JPanel implements ActionListener
 			currentColor = Color.green;
 		else if (blueRButton == e.getSource())
 			currentColor = Color.blue;
+		else if (steelRButton == e.getSource())
+		        currentColor = steel;
 		else if (purpleRButton == e.getSource())
 			currentColor = purple;
 		else if (whiteRButton == e.getSource())
