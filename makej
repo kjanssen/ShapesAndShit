@@ -1,5 +1,5 @@
 #!/bin/bash 
 
 javac *.java
-jar cvmf manifest.txt DrawShapes.jar *.class
+jar cmf manifest.txt DrawShapes.jar *.class
 rm *.class
