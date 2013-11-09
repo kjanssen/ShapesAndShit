@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener
 {
-    private JButton saveButton;
+    private JButton saveButton, loadButton, colorButton;
     private JFrame outside;
     private boolean inFrame = true;
     private int currentX, currentY;
@@ -35,6 +35,12 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         saveButton = new JButton ("Save Shapes");
         add (saveButton);
         saveButton.addActionListener (this);
+        loadButton = new JButton ("Load Shapes");
+        add (loadButton);
+        loadButton.addActionListener (this);
+        colorButton = new JButton ("Change Background Color");
+        add (colorButton);
+        colorButton.addActionListener (this);
         setBackground (Color.BLACK);
         addMouseMotionListener(this);
         addMouseListener(this);
@@ -62,7 +68,8 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     {
         super.paintComponent (g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         for (int i = 0; i < S.size(); i++)
         {
             S.get(i).paintComponent (g2);
@@ -72,8 +79,31 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     {
         if (e.getSource() == saveButton)
         {
-            ShapeIO shapeIO = new ShapeIO ();
-            shapeIO.writeShapes ("SavedShapes.sio", S);
+            FileIODialog fileiodialog = new FileIODialog(outside, true, "Save");
+
+            if (fileiodialog.getAnswer() == true)
+            {
+                ShapeIO shapeIO = new ShapeIO ();
+                shapeIO.writeShapes (fileiodialog.getFilename(), S);
+            }
+        }
+        else if (e.getSource() == loadButton)
+        {
+            FileIODialog fileiodialog = new FileIODialog(outside, true, "Load");
+
+            if (fileiodialog.getAnswer() == true)
+            {
+                ShapeIO shapeIO = new ShapeIO ();
+                shapeIO.readShapes (fileiodialog.getFilename(), S);
+                repaint();
+            }
+        }
+        else if (e.getSource() == colorButton)
+        {
+            BackgroundDialog backgrounddialog = new BackgroundDialog(outside, true, getBackground());
+
+            if (backgrounddialog.getAnswer() == true)
+                setBackground (backgrounddialog.getColor());
         }
     }
     public void mousePressed (MouseEvent e)
@@ -94,7 +124,6 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                     break;
                     //System.out.println ("Selected " + selected.getName() + "; " + selected);
                 }
-
             repaint();
         }
         else if (e.getButton() == e.BUTTON3) // Right mouse button
@@ -110,11 +139,11 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 }
 
             repaint();
-
+            
             if (selected != null)
                 selected.modifyShape (outside, e.getX(), e.getY());
             else
-            {	
+            {        
                 ShapeDialog shapedialog = new ShapeDialog(outside, true, e.getX(), e.getY());
                 //ShapeDialog shapedialog = new ShapeDialog(this, true, e.getX(), e.getY());
                 if (shapedialog.getAnswer() == true)
