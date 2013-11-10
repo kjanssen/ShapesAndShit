@@ -68,10 +68,10 @@ public final class Star extends Shape
         int[] innerVy = inner.getVertexY();
         for (int i = 0; i < 2 * numSides; i += 2)
         {
-            vertexX[i] = outerVx[i/2];
-            vertexY[i] = outerVy[i/2];
-            vertexX[i+1] = innerVx[i/2];
-            vertexY[i+1] = innerVy[i/2];
+            vertexX[i] = innerVx[i/2];
+            vertexY[i] = innerVy[i/2];
+            vertexX[i+1] = outerVx[i/2];
+            vertexY[i+1] = outerVy[i/2];
         }
 
         polygon = new Polygon(vertexX, vertexY, 2 * numSides);
