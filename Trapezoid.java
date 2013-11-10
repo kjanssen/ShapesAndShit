@@ -55,9 +55,9 @@ public final class Trapezoid extends Quadrilateral
     public void setVertices ()
     {
         vertexX[0] = -side3/2; vertexY[0] = -side/2;
-        vertexX[1] = -side3/2; vertexY[1] = side/2;
+        vertexX[1] = -side2/2; vertexY[1] = side/2;
         vertexX[2] = side2/2; vertexY[2] = side/2;
-        vertexX[3] = side2/2; vertexY[3] = -side/2;
+        vertexX[3] = side3/2; vertexY[3] = -side/2;
         for (int i = 0; i < 4; i++)
         {
             vertexX[i] += centerX;
