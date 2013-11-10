@@ -75,6 +75,8 @@ public class ShapeDialog extends JDialog implements ActionListener
                     newShape = new RegularPolygon (); break;
 	        case TRAPEZOID:
 		    newShape = new Trapezoid (); break;
+	        case STAR:
+		    newShape = new Star (); break;
                 default:
                     newShape = new Circle (); break;
             }
