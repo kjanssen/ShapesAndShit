@@ -28,10 +28,13 @@ public final class Star extends Shape
 
     public Star()
     {
-        side = 20;
-        numSides = 5;
         outer = new RegularPolygon();
         inner = new RegularPolygon();
+        side = outer.getSide();
+        numSides = outer.getNumSides();
+        color = Color.black;
+        angle = 0.0;
+
         setVertices();
     }
 
