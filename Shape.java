@@ -15,7 +15,7 @@ import javax.swing.*;
 
 public class Shape implements Comparable<Shape>
 {
-	public enum ShapeType {CIRCLE, SQUARE, RECTANGLE, EQUILATERAL, RIGHT, SCALENE};
+        public enum ShapeType {CIRCLE, SQUARE, RECTANGLE, EQUILATERAL, RIGHT, SCALENE, POLYGON, TRAPEZOID, STAR};
 	protected int centerX;
 	protected int centerY;
 	protected int side;

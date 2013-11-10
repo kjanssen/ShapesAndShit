@@ -71,6 +71,8 @@ public class ShapeDialog extends JDialog implements ActionListener
 					newShape = new Right (); break;
 				case SCALENE:
 					newShape = new Scalene (); break;
+			        case POLYGON:
+			                newShape = new RegularPolygon (); break;
 				default:
 					newShape = new Circle (); break;
 			}
@@ -89,7 +91,9 @@ public class ShapeDialog extends JDialog implements ActionListener
 	{
 		private JCheckBox circleCBox = null, equilateralCBox = null, 
 			squareCBox = null, scaleneCBox = null,
-			rightCBox = null, rectangleCBox = null;
+		        rightCBox = null, rectangleCBox = null,
+		        polygonCBox = null, trapezoidCBox = null,
+		        starCBox = null;
 		private JPanel shapePanel = null;
 		private ButtonGroup shapeGroup = null;
 		private Shape.ShapeType currentShape = Shape.ShapeType.CIRCLE;
@@ -100,7 +104,7 @@ public class ShapeDialog extends JDialog implements ActionListener
 			setLayout (new GridLayout (2,1));
 			add(new JLabel("Select a shape:"));
 			shapePanel = new JPanel();
-			shapePanel.setLayout (new GridLayout (2,3));
+			shapePanel.setLayout (new GridLayout (3,3));
 			circleCBox = new JCheckBox ("Circle",true);
 			circleCBox.addActionListener(this);
 			shapePanel.add (circleCBox);
@@ -119,6 +123,15 @@ public class ShapeDialog extends JDialog implements ActionListener
 			scaleneCBox = new JCheckBox ("Scalene",false);
 			scaleneCBox.addActionListener(this);
 			shapePanel.add (scaleneCBox);
+			polygonCBox = new JCheckBox ("Polygon", false);
+			polygonCBox.addActionListener(this);
+			shapePanel.add (polygonCBox);
+			trapezoidCBox = new JCheckBox ("Trapezoid", false);
+			trapezoidCBox.addActionListener(this);
+			shapePanel.add (trapezoidCBox);
+			starCBox = new JCheckBox ("Star", false);
+			starCBox.addActionListener (this);
+			shapePanel.add (starCBox);
 			add (shapePanel);
 			shapeGroup = new ButtonGroup ();
 			shapeGroup.add (circleCBox);
@@ -127,6 +140,9 @@ public class ShapeDialog extends JDialog implements ActionListener
 			shapeGroup.add (rectangleCBox);
 			shapeGroup.add (rightCBox);
 			shapeGroup.add (scaleneCBox);
+			shapeGroup.add (polygonCBox);
+			shapeGroup.add (trapezoidCBox);
+			shapeGroup.add (starCBox);
 		}
 
 		public void actionPerformed(ActionEvent e) 
@@ -145,6 +161,12 @@ public class ShapeDialog extends JDialog implements ActionListener
 				currentShape = Shape.ShapeType.RIGHT;
 			else if (scaleneCBox == e.getSource())
 				currentShape = Shape.ShapeType.SCALENE;
+			else if (polygonCBox == e.getSource())
+			        currentShape = Shape.ShapeType.POLYGON;
+			else if (trapezoidCBox == e.getSource())
+			        currentShape = Shape.ShapeType.TRAPEZOID;
+			else if (starCBox == e.getSource())
+			        currentShape = Shape.ShapeType.STAR;
 		}
 	}
 } 
