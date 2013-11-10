@@ -13,7 +13,7 @@ import static java.lang.Math.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class RegularPolygon extends Shape
+public final class RegularPolygon extends Shape
 {
     private int [] vertexX;
     private int [] vertexY;
@@ -72,7 +72,11 @@ public class RegularPolygon extends Shape
 
     public boolean isIn (int X, int Y)
     {
-        return polygon.contains (X, Y);
+        if (polygon.contains (X, Y))
+            highlited = true;
+        else
+            highlited = false;
+        return highlited;
     }
 
     public void move (int deltaX, int deltaY)
@@ -86,12 +90,12 @@ public class RegularPolygon extends Shape
     {
         double t = 2 * Math.PI / numSides;
         double r = side / Math.sin(t / 2);
-        double dt = (numSides % 2) * t / 2;
+        double dt = ((numSides + 1)  % 2) * t / 2;
 
         for (int i = 0; i < numSides; i++)
         {
-            vertexX[i] = (int)(r * Math.sin(numSides * t + dt)) + centerX;
-            vertexY[i] = (int)(-r * Math.cos(numSides * t + dt)) + centerY;
+            vertexX[i] = (int)(r * Math.sin(i * t - dt)) + centerX;
+            vertexY[i] = (int)(-r * Math.cos(i * t - dt)) + centerY;
         }
 
         rotate ();
