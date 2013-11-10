@@ -55,6 +55,21 @@ public final class RegularPolygon extends Shape
         setVertices ();
     }
 
+    public int getNumSides()
+    {
+        return numSides;
+    }
+
+    public int[] getVertexX ()
+    {
+        return vertexX;
+    }
+
+    public int[] getVertexY ()
+    {
+        return vertexY;
+    }
+
     public void paintComponent (Graphics2D g2)
     {
         g2.setPaint (color);
