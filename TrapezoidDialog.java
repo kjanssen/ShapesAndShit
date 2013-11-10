@@ -29,15 +29,15 @@ public class TrapezoidDialog extends JDialog implements ActionListener
 	private int side = 0;
 	private int oldSide2 = 0;
 	private int side2 = 0;
-    private int oldSide3 = 0;
-    private int side3 = 0;
+        private int oldSide3 = 0;
+        private int side3 = 0;
 	private double oldAngle = 0;
 	private double angle = 0;
  	private boolean answer = false;
  	public Color getColor() { return currentColor; }
  	public int getSide() { return side; }
  	public int getSide2() { return side2; }
-    public int getSide3() { return side3; }
+        public int getSide3() { return side3; }
  	public double getAngle() { return angle; }
  	public boolean getAnswer() { return answer; }
 
@@ -48,8 +48,8 @@ public class TrapezoidDialog extends JDialog implements ActionListener
 		side = oldSide;
 		oldSide2 = S2;
 		side2 = oldSide2;
-        oldSide3 = S3;
-        side3 = oldSide3;
+		oldSide3 = S3;
+		side3 = oldSide3;
 		oldAngle = A;
 		angle = oldAngle;
 		currentColor = C;
@@ -77,9 +77,9 @@ public class TrapezoidDialog extends JDialog implements ActionListener
 		side2Text.addActionListener(this);
 		myPanel.add (side2Text);
 	 	myPanel.add(new JLabel("Enter the top:"));
-		side2Text = new JTextField(((Integer) side3).toString(), 20);
-		side2Text.addActionListener(this);
-		myPanel.add (side2Text);
+		side3Text = new JTextField(((Integer) side3).toString(), 20);
+		side3Text.addActionListener(this);
+		myPanel.add (side3Text);
 	 	myPanel.add(new JLabel("Enter the angle:"));
 		angleText = new JTextField(((Double) angle).toString(), 20);
 		angleText.addActionListener(this);
