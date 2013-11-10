@@ -117,6 +117,8 @@ public final class Star extends Shape
 
     public void move (int deltaX, int deltaY)
     {
+        centerX += deltaX;
+        centerY += deltaY;
         outer.move(deltaX, deltaY);
         inner.move(deltaX, deltaY);
         setVertices ();
@@ -166,6 +168,9 @@ public final class Star extends Shape
             vertexY = new int[numSides];
             centerX = x;
             centerY = y;
+
+            outer = new RegularPolygon(numSides, side, x, y, color, angle);
+            inner = new RegularPolygon(numSides, side/2, x, y, color, angle + 360/(2*numSides));
             setVertices();
         }
     }
