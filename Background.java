@@ -16,9 +16,9 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
-public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener
+public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener, KeyListener
 {
-    private JButton saveButton, loadButton, colorButton;
+    private JButton clearButton, saveButton, loadButton, colorButton;
     private JFrame outside;
     private boolean inFrame = true;
     private int currentX, currentY;
@@ -32,18 +32,23 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public Background (JFrame frame, String [] files)
     {
         outside = frame;
+	clearButton = new JButton("Clear Shapes");
+	add (clearButton);
+	clearButton.addActionListener (this);
         saveButton = new JButton ("Save Shapes");
         add (saveButton);
         saveButton.addActionListener (this);
         loadButton = new JButton ("Load Shapes");
         add (loadButton);
         loadButton.addActionListener (this);
-        colorButton = new JButton ("Change Background Color");
+        colorButton = new JButton ("Background Color");
         add (colorButton);
         colorButton.addActionListener (this);
         setBackground (Color.BLACK);
         addMouseMotionListener(this);
         addMouseListener(this);
+	addKeyListener(this);
+	setFocusable(true);
         ShapeIO shapeIO = new ShapeIO ();
         for (int i = 0; i < files.length; i++)
         {
@@ -77,7 +82,12 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     }
     public void actionPerformed (ActionEvent e)
     {
-        if (e.getSource() == saveButton)
+	if (e.getSource() == clearButton)
+        {
+	    S.clear();
+	    repaint();
+	}
+	else if (e.getSource() == saveButton)
         {
             FileIODialog fileiodialog = new FileIODialog(outside, true, "Save");
 
@@ -169,4 +179,18 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         selected = null;
     }
     public void mouseClicked (MouseEvent e) {}
+
+    public void keyPressed(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+	System.out.println(e.getKeyCode());
+	System.out.println(e.getKeyChar());
+	System.out.println(e.isActionKey());
+	System.out.println();
+
+	if (e.getKeyChar() == 'd' && selected!= null) {
+	    S.remove(selected);
+	    repaint();
+	}
+    }
 }
