@@ -23,7 +23,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     private boolean inFrame = true;
     private int currentX, currentY;
     private ArrayList <Shape> S = new ArrayList <Shape> ();
-    private Shape selected = null;
+    private ArrayList <Shape> selected = new ArrayList<Shape>();
 
     public Background ()
     {
@@ -32,9 +32,9 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public Background (JFrame frame, String [] files)
     {
         outside = frame;
-	clearButton = new JButton("Clear Shapes");
-	add (clearButton);
-	clearButton.addActionListener (this);
+        clearButton = new JButton("Clear Shapes");
+        add (clearButton);
+        clearButton.addActionListener (this);
         saveButton = new JButton ("Save Shapes");
         add (saveButton);
         saveButton.addActionListener (this);
@@ -47,8 +47,8 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         setBackground (Color.BLACK);
         addMouseMotionListener(this);
         addMouseListener(this);
-	addKeyListener(this);
-	setFocusable(true);
+        addKeyListener(this);
+        setFocusable(true);
         ShapeIO shapeIO = new ShapeIO ();
         for (int i = 0; i < files.length; i++)
         {
@@ -59,10 +59,17 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public void mouseDragged(MouseEvent e)
     {
         //System.out.println ("Mouse dragged to " + e.getX() + ", " + e.getY());
-        if (inFrame && selected != null)
+        if (inFrame && selected.size() != 0)
         {
             //System.out.println ("Moving " + selected);
-            selected.move (e.getX() - currentX, e.getY() - currentY);
+            for (int i = 0; i < selected.size(); i++) {
+                if (selected.get(i) != null)
+                    selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
+                else {
+                    selected.remove(i);
+                    i--;
+                }
+            }
             repaint();
         }
         currentX = e.getX();
@@ -82,12 +89,12 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     }
     public void actionPerformed (ActionEvent e)
     {
-	if (e.getSource() == clearButton)
+        if (e.getSource() == clearButton)
         {
-	    S.clear();
-	    repaint();
-	}
-	else if (e.getSource() == saveButton)
+            S.clear();
+            repaint();
+        }
+        else if (e.getSource() == saveButton)
         {
             FileIODialog fileiodialog = new FileIODialog(outside, true, "Save");
 
@@ -122,38 +129,47 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         inFrame = true;
         currentX = e.getX();
         currentY = e.getY();
-        selected = null;
         if (e.getButton() == e.BUTTON1) // Left mouse button
         {
             //System.out.println ("BUTTON1 pressed at " + e.getX() + ", " + e.getY());
-            for (int i = S.size()-1; selected == null && i >= 0; i--)
+            for (int i = S.size()-1; i >= 0; i--)
                 if (S.get(i).isIn(currentX, currentY))
                 {
-                    selected = S.remove(i);
-                    S.add(selected);
-                    break;
+                    selected.add(0, S.get(i));
+                    repaint();
+                    return;
                     //System.out.println ("Selected " + selected.getName() + "; " + selected);
                 }
             repaint();
         }
         else if (e.getButton() == e.BUTTON3) // Right mouse button
         {
+            int sel = -1;
             //System.out.println ("BUTTON3 pressed at " + e.getX() + ", " + e.getY());
-            for (int i = S.size()-1; selected == null && i >= 0; i--)
-                if (S.get(i).isIn(currentX, currentY))
-                {
-                    selected = S.remove(i);
-                    S.add(selected);
-                    break;
-                    //System.out.println ("Selected " + selected.getName() + "; " + selected);
+            for (int i = selected.size()-1; i >= 0; i--) {
+                if (selected.get(i) != null) {
+                    if (selected.get(i).isIn(currentX, currentY))
+                    {
+                        selected.add(0, S.get(i));
+                        break;
+                        //System.out.println ("Selected " + selected.getName() + "; " + selected);
+                    }
                 }
+                else {
+                    selected.remove(i);
+                    i--;
+                }
+            }
 
             repaint();
-            
-            if (selected != null)
-                selected.modifyShape (outside, e.getX(), e.getY());
+
+            if (sel != -1) {
+                selected.get(sel).modifyShape (outside, e.getX(), e.getY());
+                // replace with modifyAllShape method
+            }
             else
             {        
+                selected = new ArrayList<Shape> ();
                 ShapeDialog shapedialog = new ShapeDialog(outside, true, e.getX(), e.getY());
                 //ShapeDialog shapedialog = new ShapeDialog(this, true, e.getX(), e.getY());
                 if (shapedialog.getAnswer() == true)
@@ -176,21 +192,21 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public void mouseExited (MouseEvent e)
     {
         inFrame = false;
-        selected = null;
+        //selected = null;
     }
     public void mouseClicked (MouseEvent e) {}
 
     public void keyPressed(KeyEvent e) {}
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {
-	System.out.println(e.getKeyCode());
-	System.out.println(e.getKeyChar());
-	System.out.println(e.isActionKey());
-	System.out.println();
+        System.out.println(e.getKeyCode());
+        System.out.println(e.getKeyChar());
+        System.out.println(e.isActionKey());
+        System.out.println();
 
-	if (e.getKeyChar() == 'd' && selected!= null) {
-	    S.remove(selected);
-	    repaint();
-	}
+        if (e.getKeyChar() == 'd' && selected!= null) {
+            S.remove(selected);
+            repaint();
+        }
     }
 }
