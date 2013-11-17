@@ -1,5 +1,7 @@
 *.class
 *~
+*.sw[opd]
+
 
 # Package Files #
 *.jar
