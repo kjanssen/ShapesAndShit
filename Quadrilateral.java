@@ -89,4 +89,10 @@ public class Quadrilateral extends Shape
             vertexY[i] = centerY - (int) (r * sin(t));
         }
     }
+
+    public void rotateBy (double A)
+    {
+	angle += A;
+	setVertices();
+    }
 }

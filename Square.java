@@ -123,4 +123,10 @@ public final class Square extends Quadrilateral
 	{
 		return "Square";
 	}
+
+    public void scale (double R)
+    {
+        side *= R;
+        setVertices();
+    }
 }

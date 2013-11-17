@@ -148,4 +148,11 @@ public final class Right extends Triangle
         string += angle + " ";
         return string;
     }
+
+    public void scale (double R)
+    {
+        side *= R;
+	side2 *= R;
+	setVertices();
+    }
 }

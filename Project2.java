@@ -22,17 +22,6 @@ public class Project2
         JFrame frame = new JFrame ("Project 2");
         //super (frame, modal);
         Background background = new Background (frame, args);
-	background.requestFocusInWindow();
-
-	/*
-	//Make background get the focus whenever frame is activated.
-	frame.addWindowFocusListener(new WindowAdapter() {
-		public void windowGainedFocus(WindowEvent e) {
-		    background.requestFocusInWindow();
-		}
-	    });
-	*/
-
         frame.getContentPane().add (background);
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         frame.setSize (600,600);
