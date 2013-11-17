@@ -106,6 +106,5 @@ public class EquilateralDialog extends JDialog implements ActionListener
             setVisible(false);
         }
     }
-
 } 
 
