@@ -44,6 +44,12 @@ public class ShapeIO
 					shape = new Right ();
 				else if (name.equals("Scalene"))
 					shape = new Scalene ();
+				else if (name.equals("RegularPolygon"))
+				        shape = new RegularPolygon();
+				else if (name.equals("Trapezoid"))
+				        shape = new Trapezoid();
+				else if (name.equals("Star"))
+				        shape = new Star();
 				shape.fromString (string);
 				shapeList.add (shape);
 			}

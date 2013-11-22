@@ -132,6 +132,6 @@ public class Shape implements Comparable<Shape>
 
     public void scale (double R)
     {
-	side *= R;
+	side = ((int)(side * R) == 0) ? side : (int)(side * R);
     }
 }

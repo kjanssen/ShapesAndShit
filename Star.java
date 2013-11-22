@@ -13,11 +13,7 @@ import javax.swing.*;
 
 public final class Star extends Shape
 {
-    private int centerX;
-    private int centerY;
-    private int side;
     private int numSides;
-    private Color color;
     private double angle;
 
     private RegularPolygon outer;
@@ -32,7 +28,6 @@ public final class Star extends Shape
         inner = new RegularPolygon();
         side = outer.getSide();
         numSides = outer.getNumSides();
-        color = Color.black;
         angle = 0.0;
 
         setVertices();
@@ -55,8 +50,8 @@ public final class Star extends Shape
 
     public void setVertices()
     {
-        outer.setVertices();
-        inner.setVertices();
+	outer = new RegularPolygon(numSides, side, centerX, centerY, color, angle);
+	inner = new RegularPolygon(numSides, side/2, centerX, centerY, color, angle + 360/(2*numSides));
 
         numSides = outer.getNumSides();
         vertexX = new int[2*numSides];
@@ -133,9 +128,9 @@ public final class Star extends Shape
             centerY = Integer.parseInt(parts[1]);
             numSides = Integer.parseInt(parts[2]);
             side = Integer.parseInt(parts[3]);
-            Color color = new Color(Integer.parseInt(parts[4]));
+            color = new Color(Integer.parseInt(parts[4]));
             angle = Double.parseDouble (parts[5]);
-            setVertices ();
+	    setVertices();
         }
         catch (NumberFormatException e)
         {
@@ -168,7 +163,6 @@ public final class Star extends Shape
             vertexY = new int[numSides];
             centerX = x;
             centerY = y;
-
             outer = new RegularPolygon(numSides, side, x, y, color, angle);
             inner = new RegularPolygon(numSides, side/2, x, y, color, angle + 360/(2*numSides));
             setVertices();
@@ -182,6 +176,18 @@ public final class Star extends Shape
 
     public String getName ()
     {
-        return "Regular Polygon";
+        return "Star";
+    }
+
+    public void rotateBy (double A)
+    {
+	angle += A;
+	setVertices();
+    }
+
+    public void scale (double R)
+    {
+	side = ((int)(side * R) == 0) ? side : (int)(side * R);
+	setVertices();
     }
 }

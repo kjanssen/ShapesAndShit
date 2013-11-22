@@ -203,7 +203,7 @@ public final class RegularPolygon extends Shape
 
     public String getName ()
     {
-        return "Regular Polygon";
+        return "RegularPolygon";
     }
 
     public void scale (double R)
