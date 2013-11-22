@@ -146,4 +146,11 @@ public final class Trapezoid extends Quadrilateral
         string += angle + " ";
         return string;
     }
+
+    public void scale (double R) {
+	side = ((int)(side * R) == 0) ? side : (int)(side * R);
+	side2 = ((int)(side2 * R) == 0) ? side2 : (int)(side2 * R);
+	side3 = ((int)(side3 * R) == 0) ? side3 : (int)(side3 * R);
+	setVertices();
+    }
 }

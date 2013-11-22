@@ -132,7 +132,7 @@ public final class Equilateral extends Triangle
 
     public void scale (double R)
     {
-        side *= R;
+        side = ((int)(side * R) == 0) ? side : (int)(side * R);
         setVertices();
     }
 }

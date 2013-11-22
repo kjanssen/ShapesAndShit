@@ -215,7 +215,8 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public void keyPressed(KeyEvent e)
     {
 	System.out.println(e.getKeyCode());
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406) {
+	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406
+	    || e.getKeyCode () == KeyEvent.VK_CONTROL) {
 	    altDown = true;
 	    System.out.println("Alt Down");
 	}
@@ -231,7 +232,8 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 
     public void keyReleased(KeyEvent e)
     {
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406) {
+	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406
+	                           || e.getKeyCode () == KeyEvent.VK_CONTROL) {
             altDown = false;
 	    System.out.println("Alt Up");
 	}

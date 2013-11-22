@@ -126,7 +126,7 @@ public final class Square extends Quadrilateral
 
     public void scale (double R)
     {
-        side *= R;
+        side = ((int)(side * R) == 0) ? side : (int)(side * R);
         setVertices();
     }
 }

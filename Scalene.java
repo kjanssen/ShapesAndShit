@@ -169,9 +169,9 @@ public final class Scalene extends Triangle
 
     public void scale (double R)
     {
-        side *= R;
-	side2 *= R;
-	side3 *= R;
+        side = ((int)(side * R) == 0) ? side : (int)(side * R);
+	side2 = ((int)(side2 * R) == 0) ? side2 : (int)(side2 * R);
+	side3 = ((int)(side3 * R) == 0) ? side3 : (int)(side3 * R);
 	setVertices();
     }
 }	
