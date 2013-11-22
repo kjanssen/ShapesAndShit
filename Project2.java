@@ -25,7 +25,7 @@ public class Project2
         frame.getContentPane().add (background);
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         frame.setSize (600,600);
-	frame.setLocation (200, 200);
+        frame.setLocation (200, 200);
         frame.setVisible (true);
         frame.setResizable (false);
     }
