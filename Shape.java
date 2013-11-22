@@ -104,6 +104,11 @@ public class Shape implements Comparable<Shape>
     {
     }
 
+    public void setSelected (boolean selected)
+    {
+        highlited = selected;
+    }
+
     public boolean isIn (int X, int Y)
     {
         return false;
