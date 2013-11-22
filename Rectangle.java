@@ -141,4 +141,11 @@ public final class Rectangle extends Quadrilateral
         string += angle + " ";
         return string;
     }
+
+    public void scale (double R)
+    {
+	side *= R;
+	side2 *= R;
+	setVertices();
+    }
 }

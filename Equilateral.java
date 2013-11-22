@@ -129,4 +129,10 @@ public final class Equilateral extends Triangle
     {
         return "Equilateral";
     }
+
+    public void scale (double R)
+    {
+        side *= R;
+        setVertices();
+    }
 }

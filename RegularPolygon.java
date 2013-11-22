@@ -132,6 +132,12 @@ public final class RegularPolygon extends Shape
         }
     }
 
+    public void rotateBy (double A)
+    {
+	angle += A;
+	setVertices();
+    }
+
     public void setSide (int S)
     {
         side = S;
@@ -200,4 +206,9 @@ public final class RegularPolygon extends Shape
         return "Regular Polygon";
     }
 
+    public void scale (double R)
+    {
+        side *= R;
+        setVertices();
+    }
 }

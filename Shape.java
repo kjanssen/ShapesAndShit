@@ -39,6 +39,16 @@ public class Shape implements Comparable<Shape>
         centerY = Y;
     }
 
+    public int getCenterX ()
+    {
+	return centerX;
+    }
+
+    public int getCenterY ()
+    {
+	return centerY;
+    }
+
     public void setColor (Color C)
     {
         color = C;
@@ -114,5 +124,14 @@ public class Shape implements Comparable<Shape>
         centerX += deltaX;
         centerY += deltaY;
         //System.out.println ("Moving shape " + deltaX + "," + deltaY + " units");
+    }
+
+    public void rotateBy (double A)
+    {
+    }
+
+    public void scale (double R)
+    {
+	side *= R;
     }
 }

@@ -15,12 +15,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import static java.lang.Math.*;
 
 public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener, KeyListener
 {
     private JButton clearButton, saveButton, loadButton, colorButton;
     private JFrame outside;
-    private boolean inFrame = true;
+    private boolean inFrame = true, altDown = false, shiftDown = false;
     private int currentX, currentY;
     private ArrayList <Shape> S = new ArrayList <Shape> ();
     private ArrayList <Shape> selected = new ArrayList<Shape>();
@@ -47,6 +48,10 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         setBackground (Color.BLACK);
         addMouseMotionListener(this);
         addMouseListener(this);
+        clearButton.addKeyListener(this);
+        saveButton.addKeyListener(this);
+        loadButton.addKeyListener(this);
+        colorButton.addKeyListener(this);
         addKeyListener(this);
         setFocusable(true);
         ShapeIO shapeIO = new ShapeIO ();
@@ -61,14 +66,29 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         //System.out.println ("Mouse dragged to " + e.getX() + ", " + e.getY());
         if (inFrame && selected.size() != 0)
         {
-            //System.out.println ("Moving " + selected);
-            for (int i = 0; i < selected.size(); i++) {
-                if (selected.get(i) != null)
-                    selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
-                else {
-                    selected.remove(i);
-                    i--;
-                }
+            if (altDown)
+            {
+                double dt = atan2((e.getX() - selected.getCenterX()), (selected.getCenterY() - e.getY())) - 
+                    atan2((currentX - selected.getCenterX()), (selected.getCenterY() - currentY));
+
+                selected.rotateBy(toDegrees(-dt));
+            }
+            else if (shiftDown)
+            {
+                int dx1 = currentX - selected.getCenterX();
+                int dy1 = currentY - selected.getCenterY();
+                double d1 = sqrt(dx1 * dx1 + dy1 * dy1);
+
+                int dx2 = e.getX() - selected.getCenterX();
+                int dy2 = e.getY() - selected.getCenterY();
+                double d2 = sqrt(dx2 * dx2 + dy2 * dy2);
+
+                selected.scale(d2 / d1);
+            }
+            else
+            {
+                //System.out.println ("Moving " + selected);
+                selected.move (e.getX() - currentX, e.getY() - currentY);
             }
             repaint();
         }
@@ -129,6 +149,9 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         inFrame = true;
         currentX = e.getX();
         currentY = e.getY();
+
+        if (!(altDown || shiftDown)) selected = null;
+
         if (e.getButton() == e.BUTTON1) // Left mouse button
         {
             //System.out.println ("BUTTON1 pressed at " + e.getX() + ", " + e.getY());
@@ -140,6 +163,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                     return;
                     //System.out.println ("Selected " + selected.getName() + "; " + selected);
                 }
+
             repaint();
         }
         else if (e.getButton() == e.BUTTON3) // Right mouse button
@@ -184,29 +208,50 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             repaint();
         }
     }
+
     public void mouseReleased (MouseEvent e) {}
+
     public void mouseEntered (MouseEvent e) 
     {
         inFrame = true;
     }
+
     public void mouseExited (MouseEvent e)
     {
         inFrame = false;
         //selected = null;
     }
+
     public void mouseClicked (MouseEvent e) {}
 
-    public void keyPressed(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
-    public void keyTyped(KeyEvent e) {
+    public void keyPressed(KeyEvent e)
+    {
         System.out.println(e.getKeyCode());
-        System.out.println(e.getKeyChar());
-        System.out.println(e.isActionKey());
-        System.out.println();
-
-        if (e.getKeyChar() == 'd' && selected!= null) {
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406) {
+            altDown = true;
+            System.out.println("Alt Down");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDown = true;
+            System.out.println("Shift Down");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_DELETE && selected!= null) {
             S.remove(selected);
             repaint();
         }
     }
+
+    public void keyReleased(KeyEvent e)
+    {
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406) {
+            altDown = false;
+            System.out.println("Alt Up");
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDown = false;
+            System.out.println("Shift Up");
+        }
+    }
+
+    public void keyTyped(KeyEvent e) {}
 }
