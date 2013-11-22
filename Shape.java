@@ -15,6 +15,7 @@ import javax.swing.*;
 
 public class Shape implements Comparable<Shape>
 {
+    protected double angle;
     public enum ShapeType {CIRCLE, SQUARE, RECTANGLE, EQUILATERAL, RIGHT, SCALENE, POLYGON, TRAPEZOID, STAR};
     protected int centerX;
     protected int centerY;
@@ -56,6 +57,10 @@ public class Shape implements Comparable<Shape>
     public double perimeter ()
     {
         return 0;
+    }
+
+    public double getAngle() {
+        return angle;
     }
 
     public void fromString (String str)
