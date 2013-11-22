@@ -3,3 +3,9 @@
 javac *.java
 jar cmf manifest.txt DrawShapes.jar *.class
 rm -f *.class
+
+if [[ $1 == "run" ]]; then
+    java -jar DrawShapes.jar
+fi
+
+exit 0
