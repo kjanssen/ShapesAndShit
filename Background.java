@@ -234,7 +234,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public void mouseExited (MouseEvent e) {
         inFrame = false;
     }
-    
+
     public void mouseClicked (MouseEvent e) {}
 
     public void keyPressed(KeyEvent e)
