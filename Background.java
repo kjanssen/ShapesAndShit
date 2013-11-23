@@ -91,14 +91,14 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             else
             {
                 //System.out.println ("Moving " + selected);
-		for (int i = 0; i < selected.size(); i++) {
-		    if (selected.get(i) != null)
-			selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
-		    else {
-			selected.remove(i);
-			i--;
-		    }
-		}
+                for (int i = 0; i < selected.size(); i++) {
+                    if (selected.get(i) != null)
+                        selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
+                    else {
+                        selected.remove(i);
+                        i--;
+                    }
+                }
             }
             repaint();
         }
@@ -167,10 +167,10 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 }
             }
 
-	    if (!(altDown || shiftDown)) {
-		emptySelected();
-		repaint();
-	    }
+            if (!(altDown || shiftDown)) {
+                emptySelected();
+                repaint();
+            }
         }
         else if (e.getButton() == e.BUTTON3) { // Right mouse button
             int sel = -1;
@@ -235,40 +235,40 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
     public void mouseExited (MouseEvent e) {
         inFrame = false;
     }
-    
+
     public void mouseClicked (MouseEvent e) {}
 
     public void keyPressed(KeyEvent e)
     {
-	System.out.println(e.getKeyCode());
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406
-	    || e.getKeyCode () == KeyEvent.VK_CONTROL) {
-	    altDown = true;
-	    System.out.println("Alt Down");
-	}
-	else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-	    shiftDown = true;
-	    System.out.println("Shift Down");
-	}
+        //System.out.println(e.getKeyCode());
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406
+                || e.getKeyCode () == KeyEvent.VK_CONTROL) {
+            altDown = true;
+            //System.out.println("Alt Down");
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDown = true;
+            //System.out.println("Shift Down");
+        }
         else if (e.getKeyCode() == KeyEvent.VK_DELETE && selected!= null) {
             for (int i = 0; i < selected.size(); i++)
-		S.remove(selected.get(i));
+                S.remove(selected.get(i));
 
-	    emptySelected();
+            emptySelected();
             repaint();
         }
     }
 
     public void keyReleased(KeyEvent e)
     {
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406
-	                           || e.getKeyCode () == KeyEvent.VK_CONTROL) {
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406
+                || e.getKeyCode () == KeyEvent.VK_CONTROL) {
             altDown = false;
-            System.out.println("Alt Up");
+            //System.out.println("Alt Up");
         }
         else if(e.getKeyCode() == KeyEvent.VK_SHIFT) {
             shiftDown = false;
-            System.out.println("Shift Up");
+            //System.out.println("Shift Up");
         }
     }
 
