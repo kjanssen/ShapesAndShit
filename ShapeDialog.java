@@ -1,47 +1,63 @@
-// file: ShapeDialog.java
-// CS 360 - Fall 2012 - Watts
-// Project 2
-// October 2012 
-// Originally created by Dr. Watts
-// http://watts.cs.sonoma.edu
-/*
-   The file contains a Dialog box class for selecting a shape
-   */
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
-public class ShapeDialog extends JDialog implements ActionListener 
-{
-    private JPanel myPanel = null;
-    private JButton OKButton = null, cancelButton = null;
-    private ShapePanel shapePanel = null;
-    private JPanel buttonPanel = null;    
-    private Shape newShape = null;
-    private boolean answer = false;
-    public Shape getMyShape () {return newShape; }
+public class ShapeDialog extends JDialog implements ActionListener {
+    protected JPanel myPanel = null;
+    protected JButton OKButton = null, cancelButton = null;
+    protected JTextField sideText;
+    protected JTextField scaleText;
+    protected JTextField angleText;
+    protected ColorPanel colorPanel = null;
+    protected JPanel buttonPanel = null;    
+    protected Color currentColor = Color.white;
+    protected int oldSide = 0;
+    protected int side = 0;
+    protected int oldSide2 = 0;
+    protected int side2 = 0;
+    protected int oldSide3 = 0;
+    protected int side3 = 0;
+    protected double oldAngle = 0;
+    protected double angle = 0;
+    protected double oldScale = 1.0;
+    protected double scale = 1.0;
+    protected boolean answer = false;
+    public Color getColor() { return currentColor; }
+    public int getSide() { return side; }
+    public int getSide2() { return side2; }
+    public int getSide3() { return side3; }
+    public double getScale() { return scale; }
+    public double getAngle() { return angle; }
     public boolean getAnswer() { return answer; }
 
-    public ShapeDialog(JFrame frame, boolean modal, int x, int y)
-        //public ShapeDialog(JPanel frame, boolean modal, int x, int y)
-    {
+    public ShapeDialog(JFrame frame, boolean modal) {
         super(frame, modal);
+    }
+
+    public ShapeDialog(JFrame frame, boolean modal, int x, int y, double A) {
+        super(frame, modal);
+        oldAngle = A;
+        angle = oldAngle;
         myPanel = new JPanel();
         getContentPane().add(myPanel);
-        myPanel.setLayout (new FlowLayout());
-        shapePanel = new ShapePanel ();
-        myPanel.add (shapePanel);
+        myPanel.setLayout (new FlowLayout ());
         addTextAndButtons ();
-        setTitle ("New Shape Dialog");
+        setTitle ("Modify Scalene Dialog");
         setLocation (x, y);
-        setSize (300,190);
+        setSize (300,375);
         setVisible(true);
     }
 
     private void addTextAndButtons ()
     {
+        myPanel.add(new JLabel("Enter the amount to scale the shapes by:"));
+        scaleText = new JTextField(((Double) scale).toString(), 20);
+        scaleText.addActionListener(this);
+        myPanel.add (scaleText);
+        myPanel.add(new JLabel("Enter the angle:"));
+        angleText = new JTextField(((Double) angle).toString(), 20);
+        angleText.addActionListener(this);
+        myPanel.add (angleText);
         buttonPanel = new JPanel();
         OKButton = new JButton("    OK    ");
         OKButton.addActionListener(this);
@@ -51,38 +67,32 @@ public class ShapeDialog extends JDialog implements ActionListener
         buttonPanel.add(cancelButton); 
         myPanel.add(buttonPanel); 
     }
-
+    
     public void actionPerformed(ActionEvent e) 
     {
         if(OKButton == e.getSource()) 
         {
-            Shape.ShapeType currentShape = shapePanel.getMyShape ();
-            switch (currentShape)
-            {
-                case CIRCLE:
-                    newShape = new Circle (); break;
-                case SQUARE:
-                    newShape = new Square (); break;
-                case RECTANGLE:
-                    newShape = new Rectangle (); break;
-                case EQUILATERAL:
-                    newShape = new Equilateral (); break;
-                case RIGHT:
-                    newShape = new Right (); break;
-                case SCALENE:
-                    newShape = new Scalene (); break;
-                case POLYGON:
-                    newShape = new RegularPolygon (); break;
-	        case TRAPEZOID:
-		    newShape = new Trapezoid (); break;
-	        case STAR:
-		    newShape = new Star (); break;
-                default:
-                    newShape = new Circle (); break;
-            }
+            currentColor = colorPanel.getColor();
             answer = true;
             setVisible(false);
             getContentPane().remove(myPanel);
+            try
+            {
+                scale = Integer.parseInt (scaleText.getText());
+            }
+            catch (NumberFormatException ex)
+            {
+                scale = oldSide;
+            }
+            try
+            {
+                angle = Double.parseDouble (angleText.getText());
+            }
+            catch (NumberFormatException ex)
+            {
+                angle = oldAngle;
+            }
+            answer = scale == 0 && angle == 0 ? false : true;
         }
         else if(cancelButton == e.getSource()) 
         {
@@ -90,88 +100,4 @@ public class ShapeDialog extends JDialog implements ActionListener
             setVisible(false);
         }
     }
-
-    public class ShapePanel extends JPanel implements ActionListener 
-    {
-        private JCheckBox circleCBox = null, equilateralCBox = null, 
-            squareCBox = null, scaleneCBox = null,
-            rightCBox = null, rectangleCBox = null,
-            polygonCBox = null, trapezoidCBox = null,
-            starCBox = null;
-        private JPanel shapePanel = null;
-        private ButtonGroup shapeGroup = null;
-        private Shape.ShapeType currentShape = Shape.ShapeType.CIRCLE;
-        public Shape.ShapeType getMyShape () { return currentShape; }
-
-        public ShapePanel ()
-        {
-            setLayout (new GridLayout (2,1));
-            add(new JLabel("Select a shape:"));
-            shapePanel = new JPanel();
-            shapePanel.setLayout (new GridLayout (3,3));
-            circleCBox = new JCheckBox ("Circle",true);
-            circleCBox.addActionListener(this);
-            shapePanel.add (circleCBox);
-            squareCBox = new JCheckBox ("Square",false);
-            squareCBox.addActionListener(this);
-            shapePanel.add (squareCBox);
-            rectangleCBox = new JCheckBox ("Rectangle",false);
-            rectangleCBox.addActionListener(this);
-            shapePanel.add (rectangleCBox);
-            equilateralCBox = new JCheckBox ("Equilateral",false);
-            equilateralCBox.addActionListener(this);
-            shapePanel.add (equilateralCBox);
-            rightCBox = new JCheckBox ("Right",false);
-            rightCBox.addActionListener(this);
-            shapePanel.add (rightCBox);
-            scaleneCBox = new JCheckBox ("Scalene",false);
-            scaleneCBox.addActionListener(this);
-            shapePanel.add (scaleneCBox);
-            polygonCBox = new JCheckBox ("Polygon", false);
-            polygonCBox.addActionListener(this);
-            shapePanel.add (polygonCBox);
-            trapezoidCBox = new JCheckBox ("Trapezoid", false);
-            trapezoidCBox.addActionListener(this);
-            shapePanel.add (trapezoidCBox);
-            starCBox = new JCheckBox ("Star", false);
-            starCBox.addActionListener (this);
-            shapePanel.add (starCBox);
-            add (shapePanel);
-            shapeGroup = new ButtonGroup ();
-            shapeGroup.add (circleCBox);
-            shapeGroup.add (squareCBox);
-            shapeGroup.add (equilateralCBox);
-            shapeGroup.add (rectangleCBox);
-            shapeGroup.add (rightCBox);
-            shapeGroup.add (scaleneCBox);
-            shapeGroup.add (polygonCBox);
-            shapeGroup.add (trapezoidCBox);
-            shapeGroup.add (starCBox);
-        }
-
-        public void actionPerformed(ActionEvent e) 
-        {
-            if (circleCBox == e.getSource())
-                currentShape = Shape.ShapeType.CIRCLE;
-            else if (squareCBox == e.getSource())
-                currentShape = Shape.ShapeType.SQUARE;
-            else if (rectangleCBox == e.getSource())
-                currentShape = Shape.ShapeType.RECTANGLE;
-            else if (equilateralCBox == e.getSource())
-                currentShape = Shape.ShapeType.EQUILATERAL;
-            else if (equilateralCBox == e.getSource())
-                currentShape = Shape.ShapeType.EQUILATERAL;
-            else if (rightCBox == e.getSource())
-                currentShape = Shape.ShapeType.RIGHT;
-            else if (scaleneCBox == e.getSource())
-                currentShape = Shape.ShapeType.SCALENE;
-            else if (polygonCBox == e.getSource())
-                currentShape = Shape.ShapeType.POLYGON;
-            else if (trapezoidCBox == e.getSource())
-                currentShape = Shape.ShapeType.TRAPEZOID;
-            else if (starCBox == e.getSource())
-                currentShape = Shape.ShapeType.STAR;
-        }
-    }
-} 
-
+}

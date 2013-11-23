@@ -14,32 +14,10 @@ import java.awt.event.*;
 import javax.swing.*;
 
 
-public class ScaleneDialog extends JDialog implements ActionListener 
+public class ScaleneDialog extends ShapeDialog implements ActionListener 
 {
-    private JPanel myPanel = null;
-    private JButton OKButton = null, cancelButton = null;
-    private JTextField sideText;
     private JTextField side2Text;
     private JTextField side3Text;
-    private JTextField angleText;
-    private ColorPanel colorPanel = null;
-    private JPanel buttonPanel = null;    
-    private Color currentColor = Color.white;
-    private int oldSide = 0;
-    private int side = 0;
-    private int oldSide2 = 0;
-    private int side2 = 0;
-    private int oldSide3 = 0;
-    private int side3 = 0;
-    private double oldAngle = 0;
-    private double angle = 0;
-    private boolean answer = false;
-    public Color getColor() { return currentColor; }
-    public int getSide() { return side; }
-    public int getSide2() { return side2; }
-    public int getSide3() { return side3; }
-    public double getAngle() { return angle; }
-    public boolean getAnswer() { return answer; }
 
     public ScaleneDialog(JFrame frame, boolean modal, int x, int y, int S1, int S2, int S3, double A, Color C)
     {
@@ -142,6 +120,5 @@ public class ScaleneDialog extends JDialog implements ActionListener
             setVisible(false);
         }
     }
-
 } 
 

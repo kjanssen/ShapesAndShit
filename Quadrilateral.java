@@ -61,11 +61,7 @@ public class Quadrilateral extends Shape
 
     public boolean isIn (int X, int Y)
     {
-        if (polygon.contains (X, Y))
-            highlited = true;
-        else 
-            highlited = false;
-        return highlited;
+        return polygon.contains (X, Y);
     }
 
     public void move (int deltaX, int deltaY)

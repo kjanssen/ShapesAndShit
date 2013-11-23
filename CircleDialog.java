@@ -18,22 +18,22 @@ public class CircleDialog extends JDialog implements ActionListener
 {
     private JPanel myPanel = null;
     private JButton OKButton = null, cancelButton = null;
-    private JTextField diameterText;
+    private JTextField sideText;
     private ColorPanel colorPanel = null;
     private JPanel buttonPanel = null;    
     private Color currentColor = Color.white;
-    private int oldRadius = 0;
-    private int diameter = 0;
+    private int oldSide = 0;
+    private int side = 0;
     private boolean answer = false;
     public Color getColor() { return currentColor; }
-    public int getRadius() { return diameter / 2; }
+    public int getSide() { return side / 2; }
     public boolean getAnswer() { return answer; }
 
     public CircleDialog(JFrame frame, boolean modal, int x, int y, int R, Color C)
     {
         super(frame, modal);
-        oldRadius = R;
-        diameter = 2 * oldRadius;
+        oldSide = R;
+        side = 2 * oldSide;
         currentColor = C;
         myPanel = new JPanel();
         getContentPane().add(myPanel);
@@ -51,9 +51,9 @@ public class CircleDialog extends JDialog implements ActionListener
     private void addTextAndButtons ()
     {
         myPanel.add(new JLabel("Enter the diameter:"));
-        diameterText = new JTextField(((Integer) diameter).toString(), 20);
-        diameterText.addActionListener(this);
-        myPanel.add (diameterText);
+        sideText = new JTextField(((Integer) side).toString(), 20);
+        sideText.addActionListener(this);
+        myPanel.add (sideText);
         buttonPanel = new JPanel();
         OKButton = new JButton("    OK    ");
         OKButton.addActionListener(this);
@@ -73,13 +73,13 @@ public class CircleDialog extends JDialog implements ActionListener
             currentColor = colorPanel.getColor ();
             try
             {
-                diameter = Integer.parseInt (diameterText.getText());
+                side = Integer.parseInt (sideText.getText());
             }
             catch (NumberFormatException ex)
             {
-                diameter = 2 * oldRadius;
+                side = 2 * oldSide;
             }
-            answer = diameter == 0 ? false : true;
+            answer = side == 0 ? false : true;
         }
         else if(cancelButton == e.getSource()) 
         {
@@ -87,6 +87,5 @@ public class CircleDialog extends JDialog implements ActionListener
             setVisible(false);
         }
     }
-
 } 
 

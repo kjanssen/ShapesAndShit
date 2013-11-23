@@ -1,6 +1,6 @@
 *.class
 *~
-*.sw[pod]
+*.sw[opd]
 
 # Package Files #
 *.jar

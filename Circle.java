@@ -51,7 +51,7 @@ public final class Circle extends Shape
         CircleDialog circledialog = new CircleDialog (frame, true, x, y, side, color); 
         if (circledialog.getAnswer() == true)
         {
-            side = circledialog.getRadius ();
+            side = circledialog.getSide ();
             color = circledialog.getColor ();
         }
     }
@@ -92,8 +92,7 @@ public final class Circle extends Shape
         int deltaY = Y - centerY;
         double dist = sqrt (deltaX * deltaX + deltaY * deltaY);
         //System.out.println ("dist = " + dist + " side = " + side);
-        highlited = dist <= side;
-        return highlited;
+        return  dist <= side;
 
     }
 }

@@ -15,6 +15,7 @@ import javax.swing.*;
 
 public class Shape implements Comparable<Shape>
 {
+    protected double angle;
     public enum ShapeType {CIRCLE, SQUARE, RECTANGLE, EQUILATERAL, RIGHT, SCALENE, POLYGON, TRAPEZOID, STAR};
     protected int centerX;
     protected int centerY;
@@ -68,6 +69,10 @@ public class Shape implements Comparable<Shape>
         return 0;
     }
 
+    public double getAngle() {
+        return angle;
+    }
+
     public void fromString (String str)
     {
         String [] parts = str.split (" ");
@@ -112,6 +117,11 @@ public class Shape implements Comparable<Shape>
 
     public void paintComponent (Graphics2D g2)
     {
+    }
+
+    public void setSelected (boolean selected)
+    {
+        highlited = selected;
     }
 
     public boolean isIn (int X, int Y)
