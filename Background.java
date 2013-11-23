@@ -1,7 +1,4 @@
-// File: Background.java
-// CS 360 - Fall 2012 - Watts
-// Project 2
-// October 2012 
+// File: Background.java // CS 360 - Fall 2012 - Watts // Project 2 // October 2012 
 // Originally created by Dr. Watts
 // http://watts.cs.sonoma.edu
 /*
@@ -15,6 +12,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import static java.lang.Math.*;
 
 public class Background extends JPanel implements ActionListener, MouseMotionListener, MouseListener, KeyListener {
@@ -91,14 +90,14 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             else
             {
                 //System.out.println ("Moving " + selected);
-		for (int i = 0; i < selected.size(); i++) {
-		    if (selected.get(i) != null)
-			selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
-		    else {
-			selected.remove(i);
-			i--;
-		    }
-		}
+                for (int i = 0; i < selected.size(); i++) {
+                    if (selected.get(i) != null)
+                        selected.get(i).move (e.getX() - currentX, e.getY() - currentY);
+                    else {
+                        selected.remove(i);
+                        i--;
+                    }
+                }
             }
             repaint();
         }
@@ -124,7 +123,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             repaint();
         }
         else if (e.getSource() == saveButton) {
-            FileIODialog fileiodialog = new FileIODialog(outside, true, "Save");
+            FileIODialog fileiodialog = new FileIODialog(outside, true, "Save Shapes", "Save", ".sio", "SavedShapes.sio");
 
             if (fileiodialog.getAnswer() == true) {
                 ShapeIO shapeIO = new ShapeIO ();
@@ -132,7 +131,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             }
         }
         else if (e.getSource() == loadButton) {
-            FileIODialog fileiodialog = new FileIODialog(outside, true, "Load");
+            FileIODialog fileiodialog = new FileIODialog(outside, true, "Load Shapes", "Load", ".sio", "SavedShapes.sio");
 
             if (fileiodialog.getAnswer() == true) {
                 ShapeIO shapeIO = new ShapeIO ();
@@ -167,10 +166,10 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 }
             }
 
-	    if (!(altDown || shiftDown)) {
-		emptySelected();
-		repaint();
-	    }
+            if (!(altDown || shiftDown)) {
+                emptySelected();
+                repaint();
+            }
         }
         else if (e.getButton() == e.BUTTON3) { // Right mouse button
             int sel = -1;
@@ -240,37 +239,48 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 
     public void keyPressed(KeyEvent e)
     {
-	System.out.println(e.getKeyCode());
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406
-	    || e.getKeyCode () == KeyEvent.VK_CONTROL) {
-	    altDown = true;
-	    System.out.println("Alt Down");
-	}
-	else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-	    shiftDown = true;
-	    System.out.println("Shift Down");
-	}
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode() == 65406
+            || e.getKeyCode () == KeyEvent.VK_CONTROL) {
+            altDown = true;
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            shiftDown = true;
+        }
         else if (e.getKeyCode() == KeyEvent.VK_DELETE && selected!= null) {
             for (int i = 0; i < selected.size(); i++)
-		S.remove(selected.get(i));
+                S.remove(selected.get(i));
 
-	    emptySelected();
+            emptySelected();
             repaint();
         }
+        else if (e.getKeyCode() == KeyEvent.VK_P)
+            printScreen();
     }
 
     public void keyReleased(KeyEvent e)
     {
-	if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406
-	                           || e.getKeyCode () == KeyEvent.VK_CONTROL) {
+        if (e.getKeyCode() == KeyEvent.VK_ALT || e.getKeyCode () == 65406
+                                   || e.getKeyCode () == KeyEvent.VK_CONTROL) {
             altDown = false;
-            System.out.println("Alt Up");
         }
         else if(e.getKeyCode() == KeyEvent.VK_SHIFT) {
             shiftDown = false;
-            System.out.println("Shift Up");
         }
     }
 
     public void keyTyped(KeyEvent e) {}
+
+    public void printScreen()
+    {
+
+        FileIODialog fileiodialog = new FileIODialog(outside, true, "Print Screen", "Save", ".png", "Screenshot.png");
+
+        if (fileiodialog.getAnswer() == true) {
+            BufferedImage bi = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB); 
+            Graphics g = bi.createGraphics();
+            this.paint(g);  //this == JComponent
+            g.dispose();
+            try{ImageIO.write(bi,"png",new File(fileiodialog.getFilename()));}catch (Exception e) {}
+        }
+    }
 }

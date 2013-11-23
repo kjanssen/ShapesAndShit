@@ -24,23 +24,23 @@ public class FileIODialog extends JDialog implements ActionListener
     public String getFilename () {return filename; }
     public boolean getAnswer() { return answer; }
 
-    public FileIODialog(JFrame frame, boolean modal, String action)
+    public FileIODialog(JFrame frame, boolean modal, String title, String action, String ext, String defName)
     {
         super(frame, modal);
         myPanel = new JPanel();
         getContentPane().add(myPanel);
         myPanel.setLayout (new FlowLayout());
-        addTextAndButtons (action);
-        setTitle (action + " Shapes");
+        addTextAndButtons (action, ext, defName);
+        setTitle (title);
         setLocation(300,300);
         setSize (400,120);
         setVisible(true);
     }
 
-    private void addTextAndButtons (String action)
+    private void addTextAndButtons (String action, String ext, String defName)
     {
-        myPanel.add(new JLabel("Enter Filename (.sio extension):"));
-        filenameText = new JTextField("SavedShapes.sio", 30);
+        myPanel.add(new JLabel("Enter Filename (" + ext + " extension):"));
+        filenameText = new JTextField(defName, 30);
         filenameText.addActionListener(this);
         myPanel.add(filenameText);
         buttonPanel = new JPanel();
