@@ -87,11 +87,7 @@ public final class RegularPolygon extends Shape
 
     public boolean isIn (int X, int Y)
     {
-        if (polygon.contains (X, Y))
-            highlited = true;
-        else
-            highlited = false;
-        return highlited;
+        return polygon.contains (X, Y);
     }
 
     public void move (int deltaX, int deltaY)
@@ -134,8 +130,8 @@ public final class RegularPolygon extends Shape
 
     public void rotateBy (double A)
     {
-	angle += A;
-	setVertices();
+        angle += A;
+        setVertices();
     }
 
     public void setSide (int S)
@@ -208,7 +204,7 @@ public final class RegularPolygon extends Shape
 
     public void scale (double R)
     {
-        side *= R;
+        side = ((int)(side * R) == 0) ? side : (int)(side * R);
         setVertices();
     }
 }

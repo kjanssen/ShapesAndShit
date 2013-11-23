@@ -72,7 +72,6 @@ public class ShapeDialog extends JDialog implements ActionListener {
     {
         if(OKButton == e.getSource()) 
         {
-            currentColor = colorPanel.getColor();
             answer = true;
             setVisible(false);
             getContentPane().remove(myPanel);
