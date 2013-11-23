@@ -42,7 +42,7 @@ public class ShapeDialog extends JDialog implements ActionListener {
         getContentPane().add(myPanel);
         myPanel.setLayout (new FlowLayout ());
         addTextAndButtons ();
-        setTitle ("Modify Scalene Dialog");
+        setTitle ("Modify Multiple Shapes Dialog");
         setLocation (x, y);
         setSize (300,375);
         setVisible(true);
@@ -72,7 +72,6 @@ public class ShapeDialog extends JDialog implements ActionListener {
     {
         if(OKButton == e.getSource()) 
         {
-            currentColor = colorPanel.getColor();
             answer = true;
             setVisible(false);
             getContentPane().remove(myPanel);

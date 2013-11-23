@@ -15,8 +15,8 @@ import javax.swing.*;
 
 public class Shape implements Comparable<Shape>
 {
-    protected double angle;
     public enum ShapeType {CIRCLE, SQUARE, RECTANGLE, EQUILATERAL, RIGHT, SCALENE, POLYGON, TRAPEZOID, STAR};
+    protected double angle;
     protected int centerX;
     protected int centerY;
     protected int side;
@@ -40,6 +40,16 @@ public class Shape implements Comparable<Shape>
         centerY = Y;
     }
 
+    public int getCenterX ()
+    {
+        return centerX;
+    }
+
+    public int getCenterY ()
+    {
+        return centerY;
+    }
+
     public void setColor (Color C)
     {
         color = C;
@@ -57,10 +67,6 @@ public class Shape implements Comparable<Shape>
     public double perimeter ()
     {
         return 0;
-    }
-
-    public double getAngle() {
-        return angle;
     }
 
     public void fromString (String str)
@@ -109,11 +115,6 @@ public class Shape implements Comparable<Shape>
     {
     }
 
-    public void setSelected (boolean selected)
-    {
-        highlited = selected;
-    }
-
     public boolean isIn (int X, int Y)
     {
         return false;
@@ -124,5 +125,22 @@ public class Shape implements Comparable<Shape>
         centerX += deltaX;
         centerY += deltaY;
         //System.out.println ("Moving shape " + deltaX + "," + deltaY + " units");
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void rotateBy (double A)
+    {
+    }
+
+    public void scale (double R)
+    {
+        side = ((int)(side * R) == 0) ? side : (int)(side * R);
+    }
+
+    public void setSelected(boolean sel) {
+        highlited = sel;
     }
 }

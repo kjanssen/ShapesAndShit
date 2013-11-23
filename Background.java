@@ -164,15 +164,16 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 if (sel == 0 && selected.size() == 1)
                     selected.get(sel).modifyShape (outside, e.getX(), e.getY());
                 else {
-                    ShapeDialog shapedialog = new ShapeDialog(frame, true, e.getX(), e.getY(), selected.get(0).getAngle());
+                    ShapeDialog shapedialog = new ShapeDialog(outside, true, e.getX(), e.getY(), selected.get(0).getAngle());
                     if (shapedialog.getAnswer() == true)
                     {
                         double scale = shapedialog.getScale();
                         double angle = shapedialog.getAngle();
                         for (int i = 0; i < selected.size(); i++) {
-                            selected.get(i).rotate(angle);
+                            selected.get(i).rotateBy(angle);
                             selected.get(i).scale(scale);
                         }
+                        repaint();
                     }
                 }
 
