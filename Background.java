@@ -152,7 +152,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
         currentX = e.getX();
         currentY = e.getY();
 
-        if (e.getButton() == e.BUTTON1) { // Left mouse button
+        if (e.getButton() == MouseEvent.BUTTON1) { // Left mouse button
             //System.out.println ("BUTTON1 pressed at " + e.getX() + ", " + e.getY());
             for (int i = S.size()-1; i >= 0; i--) {
                 if (S.get(i).isIn(currentX, currentY)) {
@@ -171,7 +171,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 repaint();
             }
         }
-        else if (e.getButton() == e.BUTTON3) { // Right mouse button
+        else if (e.getButton() == MouseEvent.BUTTON3) { // Right mouse button
             int sel = -1;
             //System.out.println ("BUTTON3 pressed at " + e.getX() + ", " + e.getY());
             for (int i = selected.size()-1; i >= 0; i--) {
@@ -253,8 +253,38 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             emptySelected();
             repaint();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_P)
+        else if (e.getKeyCode() == KeyEvent.VK_CONTROL && e.getKeyCode() == KeyEvent.VK_P)
             printScreen();
+        else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            for (int i = 0; i < selected.size(); i++) {
+                int si = S.indexOf(selected.get(i));
+                if (si > 1) {
+                    S.remove(si);
+                    S.add(si -1, selected.get(i));
+                }
+            }
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_UP) {
+            for (int i = 0; i < selected.size(); i++) {
+                int si = S.indexOf(selected.get(i));
+                if (si < S.size() - 1) {
+                    S.remove(si);
+                    S.add(si + 1, selected.get(i));
+                }
+            }
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            for (int i = 0; i < selected.size(); i++) {
+                S.remove(selected.get(i));
+                S.add(0, selected.get(i));
+            }
+        }
+        else if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            for (int i = 0; i < selected.size(); i++) {
+                S.remove(selected.get(i));
+                S.add(selected.get(i));
+            }
+        }
     }
 
     public void keyReleased(KeyEvent e)
