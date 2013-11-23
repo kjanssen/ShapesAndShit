@@ -272,15 +272,24 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
 
     public void printScreen()
     {
-
         FileIODialog fileiodialog = new FileIODialog(outside, true, "Print Screen", "Save", ".png", "Screenshot.png");
 
         if (fileiodialog.getAnswer() == true) {
+            clearButton.setVisible(false);
+            saveButton.setVisible(false);
+            loadButton.setVisible(false);
+            colorButton.setVisible(false);
+
             BufferedImage bi = new BufferedImage(this.getSize().width, this.getSize().height, BufferedImage.TYPE_INT_ARGB); 
             Graphics g = bi.createGraphics();
             this.paint(g);  //this == JComponent
             g.dispose();
             try{ImageIO.write(bi,"png",new File(fileiodialog.getFilename()));}catch (Exception e) {}
+
+            clearButton.setVisible(true);
+            saveButton.setVisible(true);
+            loadButton.setVisible(true);
+            colorButton.setVisible(true);
         }
     }
 }
