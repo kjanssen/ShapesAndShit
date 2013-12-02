@@ -50,7 +50,7 @@ public class EquilateralDialog extends JDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("Modify Equilateral Dialog");
         setLocation (x, y);
-        setSize (300,275);
+        setSize (325,275);
         setVisible(true);
     }
 

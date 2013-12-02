@@ -44,7 +44,7 @@ public class CircleDialog extends JDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("Modify Circle Dialog");
         setLocation (x, y);
-        setSize (300,225);
+        setSize (325,225);
         setVisible(true);
     }
 

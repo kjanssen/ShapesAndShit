@@ -40,7 +40,7 @@ public class ScaleneDialog extends ShapeDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("Modify Scalene Dialog");
         setLocation (x, y);
-        setSize (300,375);
+        setSize (325,375);
         setVisible(true);
     }
 

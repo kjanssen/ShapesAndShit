@@ -62,7 +62,7 @@ public class TrapezoidDialog extends JDialog implements ActionListener
 		addTextAndButtons ();
 		setTitle ("Modify Trapezoid Dialog");
 		setLocation (x, y);
-		setSize (300,325);
+		setSize (325,375);
  		setVisible(true);
 	}
 	

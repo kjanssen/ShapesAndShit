@@ -36,7 +36,7 @@ public class ShapeSelectionDialog extends JDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("New Shape Dialog");
         setLocation (x, y);
-        setSize (300,190);
+        setSize (350,225);
         setVisible(true);
     }
 

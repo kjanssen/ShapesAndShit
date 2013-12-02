@@ -56,7 +56,7 @@ public class RectangleDialog extends JDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("Modify Rectangle Dialog");
         setLocation (x, y);
-        setSize (300,325);
+        setSize (325,325);
         setVisible(true);
     }
 

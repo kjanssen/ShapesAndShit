@@ -50,7 +50,7 @@ public class SquareDialog extends JDialog implements ActionListener
 		addTextAndButtons ();
 		setTitle ("Modify Square Dialog");
 		setLocation (x, y);
-		setSize (300,275);
+		setSize (325,275);
  		setVisible(true);
 	}
 	

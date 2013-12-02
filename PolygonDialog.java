@@ -56,7 +56,7 @@ public class PolygonDialog extends JDialog implements ActionListener
 		addTextAndButtons ();
 		setTitle ("Modify Polygon Dialog");
 		setLocation (x, y);
-		setSize (300,275);
+		setSize (325, 325);
  		setVisible(true);
 	}
 	

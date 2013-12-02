@@ -56,7 +56,7 @@ public class StarDialog extends JDialog implements ActionListener
         addTextAndButtons ();
         setTitle ("Modify Star Dialog");
         setLocation (x, y);
-        setSize (300,275);
+        setSize (325, 325);
         setVisible(true);
     }
 

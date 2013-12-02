@@ -42,9 +42,9 @@ public class ShapeDialog extends JDialog implements ActionListener {
         getContentPane().add(myPanel);
         myPanel.setLayout (new FlowLayout ());
         addTextAndButtons ();
-        setTitle ("Modify Scalene Dialog");
+        setTitle ("Modify Shapes Dialog");
         setLocation (x, y);
-        setSize (300,375);
+        setSize (325,200);
         setVisible(true);
     }
 
