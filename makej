@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-javac -source 6 -target 6 *.java
+javac *.java
 jar cmf manifest.txt DrawShapes.jar *.class
 rm -f *.class
 

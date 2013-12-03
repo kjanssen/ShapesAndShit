@@ -253,7 +253,7 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
             emptySelected();
             repaint();
         }
-        else if (e.getKeyCode() == KeyEvent.VK_CONTROL && e.getKeyCode() == KeyEvent.VK_P)
+        else if (altDown && e.getKeyCode() == KeyEvent.VK_P)
             printScreen();
         else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             for (int i = 0; i < selected.size(); i++) {
