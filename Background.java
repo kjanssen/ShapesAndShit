@@ -285,6 +285,8 @@ public class Background extends JPanel implements ActionListener, MouseMotionLis
                 S.add(selected.get(i));
             }
         }
+
+	repaint();
     }
 
     public void keyReleased(KeyEvent e)
